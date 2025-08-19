@@ -19,17 +19,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
       - name: Install Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 22
+          cache: yarn
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
       - name: Lint
         run: yarn lint
-      - name: Browser Tests
-        run: yarn test:ember
+      - name: Build
+        run: yarn build
+      - name: Test App
+        run: yarn workspace test-app run test:ember
 
   test-try:
     name: Ember Try
@@ -38,21 +41,24 @@ jobs:
     strategy:
       matrix:
         scenario:
-          - ember-lts-3.16
-          - ember-lts-3.20
+          - ember-lts-3.28
+          - ember-lts-4.4
+          - ember-lts-4.8
+          - ember-lts-4.12
+          - ember-lts-5.4
+          - ember-lts-5.8
           - ember-release
           - ember-beta
           - ember-canary
-          - ember-default-with-jquery
-          - ember-classic
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
       - name: Install Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 22
+          cache: yarn
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
       - name: Try Scenario
-        run: yarn ember try:one ${{ matrix.scenario }}
+        run: yarn workspace test-app run ember try:one ${{ matrix.scenario }}
