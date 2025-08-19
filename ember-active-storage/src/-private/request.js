@@ -1,5 +1,4 @@
 import { isPresent } from '@ember/utils';
-import { Promise } from 'rsvp';
 
 export default function (xhr, url, options) {
   return new Promise((resolve, reject) => {

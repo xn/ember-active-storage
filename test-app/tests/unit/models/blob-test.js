@@ -21,7 +21,7 @@ module('Unit | Model | blob', function (hooks) {
     const blobToString = blob.toString();
     assert.equal(
       blobToString,
-      'Blob: foo.txt with checksum rL0Y20zC+Fzt72VPzMSk2A=='
+      'Blob: foo.txt with checksum rL0Y20zC+Fzt72VPzMSk2A==',
     );
   });
 });

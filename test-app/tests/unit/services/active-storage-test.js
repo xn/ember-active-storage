@@ -26,7 +26,7 @@ module('Unit | Service | active-storage', function (hooks) {
     assert.equal(blob.directUploadData.url, '/api/attachments/direct-upload');
     assert.equal(
       blob.directUploadData.headers['Content-Type'],
-      'application/pdf'
+      'application/pdf',
     );
   });
 
@@ -41,7 +41,7 @@ module('Unit | Service | active-storage', function (hooks) {
     assert.equal(blob.directUploadData.url, '/api/attachments/direct-upload');
     assert.equal(
       blob.directUploadData.headers['Content-Type'],
-      'application/pdf'
+      'application/pdf',
     );
   });
 
@@ -72,7 +72,6 @@ module('Unit | Service | active-storage', function (hooks) {
     });
   });
 
-  /* eslint-disable qunit/require-expect */
   test('upload() invokes onProgress callback', async function (assert) {
     let n = 0;
     await service.upload(file, '/api/attachments/upload', {
@@ -84,7 +83,6 @@ module('Unit | Service | active-storage', function (hooks) {
     });
     assert.ok(n > 0);
   });
-  /* eslint-enable qunit/require-expect */
 
   test('upload() invokes onLoadstart callback without upload url', async function (assert) {
     assert.expect(1);
@@ -113,7 +111,6 @@ module('Unit | Service | active-storage', function (hooks) {
     });
   });
 
-  /* eslint-disable qunit/require-expect */
   test('upload() invokes onProgress callback without upload url', async function (assert) {
     let n = 0;
     await service.upload(file, {
@@ -125,5 +122,4 @@ module('Unit | Service | active-storage', function (hooks) {
     });
     assert.ok(n > 0);
   });
-  /* eslint-enable qunit/require-expect */
 });

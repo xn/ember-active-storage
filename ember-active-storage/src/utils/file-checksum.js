@@ -26,6 +26,21 @@ export default class FileChecksum {
     return base64digest;
   }
 
+  static MD5(file) {
+    return new FileChecksum(file).createMD5();
+  }
+  readNextChunk() {
+    if (this.chunkIndex < this.chunkCount) {
+      const start = this.chunkIndex * this.chunkSize;
+      const end = Math.min(start + this.chunkSize, this.file.size);
+      const bytes = this.fileSlice.call(this.file, start, end);
+      this.fileReader.readAsArrayBuffer(bytes);
+      this.chunkIndex++;
+      return true;
+    } else {
+      return false;
+    }
+  }
   readNextChunkAsync() {
     return new Promise((resolve, reject) => {
       const start = this.chunkIndex * this.chunkSize;
@@ -43,22 +58,5 @@ export default class FileChecksum {
       this.fileReader.readAsArrayBuffer(bytes);
       this.chunkIndex++;
     });
-  }
-
-  readNextChunk() {
-    if (this.chunkIndex < this.chunkCount) {
-      const start = this.chunkIndex * this.chunkSize;
-      const end = Math.min(start + this.chunkSize, this.file.size);
-      const bytes = this.fileSlice.call(this.file, start, end);
-      this.fileReader.readAsArrayBuffer(bytes);
-      this.chunkIndex++;
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  static MD5(file) {
-    return new FileChecksum(file).createMD5();
   }
 }

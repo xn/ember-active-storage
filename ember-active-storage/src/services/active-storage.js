@@ -1,10 +1,9 @@
-import { isPresent, typeOf } from '@ember/utils';
-
-import Blob from '@algonauti/ember-active-storage/model/blob';
-import Service from '@ember/service';
 import Uploader from '@algonauti/ember-active-storage/-private/uploader';
-import { assert } from '@ember/debug';
+import Blob from '@algonauti/ember-active-storage/model/blob';
 import { getOwner } from '@ember/application';
+import { assert } from '@ember/debug';
+import Service from '@ember/service';
+import { isPresent, typeOf } from '@ember/utils';
 
 export default class ActiveStorageService extends Service {
   get _config() {
@@ -23,7 +22,7 @@ export default class ActiveStorageService extends Service {
       } else if (typeOf(urlOrOptions) == 'object') {
         assert(
           "If not explicitly passed, URL must be set on ENV['ember-active-storage'] = { url: '...' }",
-          isPresent(this._config['url'])
+          isPresent(this._config['url']),
         );
 
         options = urlOrOptions;
@@ -32,7 +31,7 @@ export default class ActiveStorageService extends Service {
     } else {
       assert(
         "If not explicitly passed, URL must be set on ENV['ember-active-storage'] = { url: '...' }",
-        isPresent(this._config['url'])
+        isPresent(this._config['url']),
       );
 
       url = this._config['url'];
@@ -43,7 +42,7 @@ export default class ActiveStorageService extends Service {
     const uploader = new Uploader({
       headers: this.headers,
       metadata: metadata,
-      ...callbacks
+      ...callbacks,
     });
 
     const blob = await Blob.build(file);

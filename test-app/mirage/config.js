@@ -21,7 +21,7 @@ export default function (config) {
     () => {
       return new Response(204);
     },
-    { timing: 150 }
+    { timing: 150 },
   );
 
   return server;
