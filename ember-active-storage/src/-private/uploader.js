@@ -90,9 +90,12 @@ export default class Uploader {
     return blob;
   }
 
-  upload(blob, url, resolve, reject) {
-    this._uploadTask(blob, url)
-      .then((blob) => resolve(blob))
-      .catch((error) => reject(error));
+  async upload(blob, url, resolve, reject) {
+    try {
+      const result = await this._uploadTask(blob, url);
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
   }
 }
