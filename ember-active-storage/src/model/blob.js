@@ -1,11 +1,11 @@
 import FileChecksum from '@algonauti/ember-active-storage/utils/file-checksum';
-import { tracked } from 'tracked-built-ins';
 
 export default class Blob {
-  // Default Values
-  @tracked file = null;
   checksum = null;
   directUploadData = null;
+  // Default Values
+  file = null;
+
   id = null;
   key = null;
   signedId = null;
